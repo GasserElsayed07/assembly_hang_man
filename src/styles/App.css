@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+}
+
 body {
   font-family: "Hanken Grotesk", Arial, sans-serif;
   background-color: #262626;
@@ -6,4 +10,36 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
+  
+}
+
+div#root{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 384px;
+  background-color: green;
+  border-radius: 4px;
+  padding: 16px 8px 16px 8px;
+  margin-block: 8px;
+}
+.status h3{
+  margin: 0;
+}
+.status p{
+  margin: 0;
+}
+
+section.languages{
+  display: flex;
+  max-width: 400px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-block: 32px;
 }
