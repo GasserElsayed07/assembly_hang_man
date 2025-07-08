@@ -10,6 +10,7 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   
 }
 
@@ -41,5 +42,20 @@ section.languages{
   max-width: 400px;
   flex-wrap: wrap;
   justify-content: center;
+  margin-block: 32px;
+}
+
+section.letters{
+  display: flex;
+  max-width: 400px;
+  justify-content: center;
+  margin-block: 32px;
+}
+
+section.keyboard{
+  display: flex;
+  max-width: 480px;
+  justify-content: center;
+  flex-wrap: wrap;
   margin-block: 32px;
 }
