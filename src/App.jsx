@@ -1,14 +1,12 @@
-import { useState } from 'react'
-
-import './App.css'
+import { useState } from "react";
+import Header from "./Header.jsx"
+import "./styles/App.css";
 
 export default function App() {
-
   return (
-    <main>
-      hi
-    </main>
-  )
+    <>
+      <Header />
+      <main>hi</main>
+    </>
+  );
 }
-
-
