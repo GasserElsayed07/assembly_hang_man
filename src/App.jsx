@@ -68,6 +68,8 @@ export default function App() {
       fontSize: "16px",
       color: "#1E1E1E",
       margin: "4px",
+      cursor: "pointer",
+
     }
 
     return (
@@ -85,6 +87,7 @@ export default function App() {
       <section className="languages">{langs}</section>
       <section className="letters">{letters}</section>
       <section className="keyboard">{keyboard}</section>
+      <button className="new-game">New Game</button>
       <main>hi</main>
     </>
   );
