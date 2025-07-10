@@ -16,6 +16,11 @@ export default function App() {
   // derived values
   const [wrongGuesses, setWrongGuesses] = useState(0)
 
+  const isGameLost = languages.length - 1 <= wrongGuesses
+  const isGameWon = currentWord.every((letter) => guessedWord.includes(letter))
+  const isGameOver = isGameLost || isGameWon
+
+  console.log(isGameWon)
   for (let i = 0; i < guessedWord.length; i++){
     const check = currentWord.includes(guessedWord[i])
     if (!check){
@@ -41,7 +46,7 @@ export default function App() {
 
       let isGuessed = guessedWord.includes(letter);
 
-      return <span id={index} style={styles}>{isGuessed? letter : " "}</span>;
+      return <span key={index} id={index} style={styles}>{isGuessed? letter : " "}</span>;
     })
   
   useEffect(() => {
@@ -111,23 +116,41 @@ export default function App() {
         }}
         style={styles}
         id={index}
+        key={letter}
       >
         {letter}
       </button>
     );
   });
 
+  const gameStatusClass = clsx('status', isGameLost && 'lost', isGameWon && 'won')
+
   return (
     <>
       <Header />
-      <div className="status">
-        <h3>You win!</h3>
-        <p>Well done! 🎉</p>
+      <div className={gameStatusClass}>
+        {
+          isGameOver?
+            isGameWon?
+              <>
+                <h3>You win!</h3><p>Well done! 🎉</p>
+              </>:
+              <>
+                <h3>You lost!</h3><p>You lose! Better start learning Assembly 😭</p>
+              </>
+            :
+            null
+
+        }
       </div>
       <section className="languages">{langs}</section>
       <section className="letters">{letters}</section>
       <section className="keyboard">{keyboard}</section>
-      <button onClick={() => {setGuessedWord([]); setWrongGuesses(0)}} className="new-game">New Game</button>
+      {
+        isGameOver
+        &&
+        <button onClick={() => {setGuessedWord([]); setWrongGuesses(0)}} className="new-game">New Game</button>
+      }
       <main>hi</main>
     </>
   );

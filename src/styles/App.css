@@ -25,10 +25,18 @@ div#root{
   flex-direction: column;
   align-items: center;
   width: 384px;
-  background-color: green;
+  height:47px;
   border-radius: 4px;
   padding: 16px 8px 16px 8px;
   margin-block: 8px;
+}
+
+.status.lost{
+  background-color: red;
+}
+
+.status.won{
+  background-color: green;
 }
 .status h3{
   margin: 0;
