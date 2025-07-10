@@ -46,18 +46,28 @@ export default function App() {
   
   useEffect(() => {
     setLangs(
-      languages.map((lang, index) => (
+      languages.map((lang, index) => {
+        let isLost = false;
+        let lastIndex = languages.length -1 == index
+        if (!lastIndex && wrongGuesses > 0 && (index <= wrongGuesses - 1)){
+          isLost = true;
+        }
+        
+        return (
         <Language
           key={index}
           name={lang.name}
           background={lang.backgroundColor}
           color={lang.color}
+          // under dev
+          className = {clsx('chip', isLost && 'lost')}
+
           id={index}
         />
-      ))
+      )})
     );
 
-  }, []);
+  }, [wrongGuesses]);
 
   let asci = 65;
   let alphabet = [];
@@ -117,7 +127,7 @@ export default function App() {
       <section className="languages">{langs}</section>
       <section className="letters">{letters}</section>
       <section className="keyboard">{keyboard}</section>
-      <button onClick={() => setGuessedWord([])} className="new-game">New Game</button>
+      <button onClick={() => {setGuessedWord([]); setWrongGuesses(0)}} className="new-game">New Game</button>
       <main>hi</main>
     </>
   );

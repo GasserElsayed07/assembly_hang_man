@@ -1,15 +1,15 @@
-
+import "./styles/lang.css"
 
 export default function Language(props){
 
     const style = {
         backgroundColor: props.background || "red",
         color: props.color || "white",
+
         fontFamily: "Hanken Grotesk",
         padding: "8px",
         borderRadius: "4px",
         margin: "1px",
-
         fontWeight: "700",
         fontStyle: "Bold",
         fontSize: "12px",
@@ -20,6 +20,6 @@ export default function Language(props){
 
     }
     return(
-        <p style={style}>{props.name || "Default Language"}</p>
+        <p className={props.className} style={style}>{props.name || "Default Language"}</p>
     )
 }
