@@ -6,14 +6,22 @@ import Language from "./language.jsx";
 import {clsx} from "clsx"
 
 export default function App() {
+  // state values
   const [langs, setLangs] = useState([]);
   const [currentWord, setCurrentWord] = useState("React".toUpperCase().split(""));
-
   const [guessedWord, setGuessedWord] = useState([]);
 
   console.log("from outside " + guessedWord);
 
-  
+  // derived values
+  const [wrongGuesses, setWrongGuesses] = useState(0)
+
+  for (let i = 0; i < guessedWord.length; i++){
+    const check = currentWord.includes(guessedWord[i])
+    if (!check){
+      console.log("wrong guesses up by 1, : " + wrongGuesses)
+    }
+  }
   
     const letters = currentWord.map((letter, index) => {
       const styles = {
@@ -79,13 +87,16 @@ export default function App() {
       margin: "4px",
       cursor: "pointer",
     };
-    console.log(letter + " " + styles.color + " " + isInside + " " + isRight + " " + isWrong)
+    
 
 
     return (
       <button
         onClick={() => {
           setGuessedWord((prev) => [...prev, letter]);
+          if(isWrong){
+            setWrongGuesses((prev) => (prev + 1))
+          }
           console.log(guessedWord);
         }}
         style={styles}
