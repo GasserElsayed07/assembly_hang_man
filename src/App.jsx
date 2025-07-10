@@ -8,12 +8,34 @@ import {clsx} from "clsx"
 export default function App() {
   const [langs, setLangs] = useState([]);
   const [currentWord, setCurrentWord] = useState("React".toUpperCase().split(""));
-  const [letters, setLetters] = useState([]);
+
   const [guessedWord, setGuessedWord] = useState([]);
 
   console.log("from outside " + guessedWord);
 
+  
+  
+    const letters = currentWord.map((letter, index) => {
+      const styles = {
+        width: "40px",
+        height: "40px",
+        borderBottom: "1px solid #F9F4DA",
+        background: "#323232",
+        margin: "2px",
 
+        fontWeight: "700",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        color: "#F9F4DA",
+        fontSize: "18px",
+      };
+
+      let isGuessed = guessedWord.includes(letter);
+
+      return <span id={index} style={styles}>{isGuessed? letter : " "}</span>;
+    })
+  
   useEffect(() => {
     setLangs(
       languages.map((lang, index) => (
@@ -27,25 +49,6 @@ export default function App() {
       ))
     );
 
-    setLetters(
-      currentWord.map((letter, index) => {
-        const styles = {
-          width: "40px",
-          height: "40px",
-          borderBottom: "1px solid #F9F4DA",
-          background: "#323232",
-          margin: "2px",
-
-          fontWeight: "700",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          color: "#F9F4DA",
-          fontSize: "18px",
-        };
-        return <span style={styles}>{letter.toUpperCase()}</span>;
-      })
-    );
   }, []);
 
   let asci = 65;
@@ -57,13 +60,9 @@ export default function App() {
   }
 
   const keyboard = alphabet.map((letter, index) => {
-    
-    
     let isInside = guessedWord.includes(letter) 
     let isRight = currentWord.includes(letter)
     let isWrong = !currentWord.includes(letter)
-    "#1E1E1E"
-    "#FCBA29"
 
     const styles = {
       backgroundColor: isInside? clsx({"red": isWrong, "green": isRight }) : "#FCBA29",
@@ -107,7 +106,7 @@ export default function App() {
       <section className="languages">{langs}</section>
       <section className="letters">{letters}</section>
       <section className="keyboard">{keyboard}</section>
-      <button className="new-game">New Game</button>
+      <button onClick={() => setGuessedWord([])} className="new-game">New Game</button>
       <main>hi</main>
     </>
   );
