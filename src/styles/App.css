@@ -38,6 +38,12 @@ div#root{
 .status.won{
   background-color: green;
 }
+
+.status.farewell{
+  background-color: #7A5EA7;
+;
+}
+
 .status h3{
   margin: 0;
 }

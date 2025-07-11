@@ -4,12 +4,14 @@ import "./styles/App.css";
 import { languages } from "./languages.js";
 import Language from "./language.jsx";
 import {clsx} from "clsx"
+import {getFarewellText} from "./utils.js"
 
 export default function App() {
   // state values
   const [langs, setLangs] = useState([]);
   const [currentWord, setCurrentWord] = useState("React".toUpperCase().split(""));
   const [guessedWord, setGuessedWord] = useState([]);
+  const [farewellText, setFarewellText] = useState()
 
   console.log("from outside " + guessedWord);
 
@@ -71,6 +73,8 @@ export default function App() {
         />
       )})
     );
+
+    if (wrongGuesses > 0)setFarewellText(getFarewellText(languages[wrongGuesses - 1].name))
 
   }, [wrongGuesses]);
 
@@ -139,7 +143,7 @@ export default function App() {
                 <h3>You lost!</h3><p>You lose! Better start learning Assembly 😭</p>
               </>
             :
-            null
+            wrongGuesses > 0 ? <h3 className="status farewell">{farewellText}</h3> : null
 
         }
       </div>
