@@ -112,12 +112,15 @@ export default function App() {
     return (
       <button
         onClick={() => {
-          setGuessedWord((prev) => [...prev, letter]);
-          if(isWrong){
-            setWrongGuesses((prev) => (prev + 1))
+          if(!isGameOver){
+            setGuessedWord((prev) => [...prev, letter]);
+            if(isWrong){
+              setWrongGuesses((prev) => (prev + 1))
+            }
+            console.log(guessedWord);
           }
-          console.log(guessedWord);
-        }}
+        }
+      }
         style={styles}
         id={index}
         key={letter}
