@@ -4,12 +4,12 @@ import "./styles/App.css";
 import { languages } from "./languages.js";
 import Language from "./language.jsx";
 import {clsx} from "clsx"
-import {getFarewellText} from "./utils.js"
+import {getFarewellText, getRandomWord} from "./utils.js"
 
 export default function App() {
   // state values
   const [langs, setLangs] = useState([]);
-  const [currentWord, setCurrentWord] = useState("React".toUpperCase().split(""));
+  const [currentWord, setCurrentWord] = useState(getRandomWord().toUpperCase().split(""));
   const [guessedWord, setGuessedWord] = useState([]);
   const [farewellText, setFarewellText] = useState()
 
@@ -121,6 +121,9 @@ export default function App() {
           }
         }
       }
+        disabled={isGameOver}
+        aria-disabled = {guessedWord.includes(letter)}
+        aria-label = {`letter ${letter}`}
         style={styles}
         id={index}
         key={letter}
@@ -135,7 +138,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <div className={gameStatusClass}>
+      <div aria-live={"polite"} role="status" className={gameStatusClass}>
         {
           isGameOver?
             isGameWon?
@@ -151,8 +154,8 @@ export default function App() {
         }
       </div>
       <section className="languages">{langs}</section>
-      <section className="letters">{letters}</section>
-      <section className="keyboard">{keyboard}</section>
+      <section role="gussed letters" className="letters">{letters}</section>
+      <section role="keyboard" className="keyboard">{keyboard}</section>
       {
         isGameOver
         &&
