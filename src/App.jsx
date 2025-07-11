@@ -31,6 +31,7 @@ export default function App() {
   }
   
     const letters = currentWord.map((letter, index) => {
+      let isGuessed = guessedWord.includes(letter);
       const styles = {
         width: "40px",
         height: "40px",
@@ -42,13 +43,20 @@ export default function App() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "#F9F4DA",
+        color: isGameLost && !isGuessed ? "#EC5D49" : "#F9F4DA",
         fontSize: "18px",
       };
 
-      let isGuessed = guessedWord.includes(letter);
+      function getLetter() {
+        if (!isGuessed && !isGameLost) {
+          return " "
+        }
+        else {
+          return letter
+        }
 
-      return <span key={index} id={index} style={styles}>{isGuessed? letter : " "}</span>;
+      }
+      return <span key={index} id={index} style={styles}>{getLetter()}</span>;
     })
   
   useEffect(() => {
@@ -159,7 +167,17 @@ export default function App() {
       {
         isGameOver
         &&
-        <button onClick={() => {setGuessedWord([]); setWrongGuesses(0)}} className="new-game">New Game</button>
+        <button 
+          onClick={
+            () => {
+              setGuessedWord([]) 
+              setWrongGuesses(0)
+              setCurrentWord(getRandomWord().toUpperCase().split(""))
+            }
+          } 
+          className="new-game"
+          >
+            New Game</button>
       }
       <main>hi</main>
     </>
