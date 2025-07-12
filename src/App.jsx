@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import {clsx} from "clsx"
+import Confetti from "react-confetti";
 import Header from "./Header.jsx";
 import "./styles/App.css";
 import { languages } from "./languages.js";
 import Language from "./language.jsx";
-import {clsx} from "clsx"
 import {getFarewellText, getRandomWord} from "./utils.js"
 
 export default function App() {
@@ -145,6 +146,12 @@ export default function App() {
 
   return (
     <>
+      {isGameWon && 
+        <Confetti
+          recycle={false}
+          numberOfPieces={1000}
+        />
+      }
       <Header />
       <div aria-live={"polite"} role="status" className={gameStatusClass}>
         {
